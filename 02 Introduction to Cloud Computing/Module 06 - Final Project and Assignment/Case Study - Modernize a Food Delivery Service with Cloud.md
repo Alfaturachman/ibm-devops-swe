@@ -38,7 +38,7 @@ Sebelum proses modernisasi, seluruh logika bisnis DineEase disatukan ke dalam sa
   - Memanfaatkan tabel yang terhubung melalui relasi kunci primer (*primary key*) dan kunci asing (*foreign key*) dengan jaminan integritas data ACID (*Atomicity, Consistency, Isolation, Durability*).
 - **Tantangan Operasional Monolitik:**
   - *Keterbatasan Penskalaan Parsial (Selective Scalability Failure)*:
-    - Modul Pemesanan tidak dapat diskalakan secara terisolasi saat terjadi lonjakan pesanan musiman pada momen perayaan besar (seperti Super Bowl di Amerika Serikat atau upacara pembukaan turnamen olahraga dunia), memaksa penskalaan seluruh monolitik yang sangat boros sumber daya.
+    - Modul Pemesanan tidak dapat diskalakan secara terisolasi saat terjadi lonjakan pesanan musiman pada momen perayaan besar, memaksa penskalaan seluruh monolitik yang sangat boros sumber daya.
   - *Latensi Tinggi pada Modul Dispatch*:
     - Kurir membutuhkan pembaruan status berlatensi ultra-rendah, namun latensi jaringan terhambat oleh keterikatan modul pada pusat data tunggal yang jauh dari jangkauan regional.
   - *Kemacetan Beban Komputasi Pembayaran*:
@@ -46,7 +46,7 @@ Sebelum proses modernisasi, seluruh logika bisnis DineEase disatukan ke dalam sa
   - *Penurunan Performa Operasi Baca (Read Bottleneck on Reviews)*:
     - Sebelum memesan, konsumen selalu membaca ulasan dan peringkat bintang restoran. Operasi penggabungan relasional (*JOIN queries*) antara tabel Restoran, Ulasan, dan Peringkat menjadi sangat lambat seiring membengkaknya volume baris data.
   - *Beban Pemeliharaan Administratif Basis Data*:
-    - Pengelolaan mandiri mencakup pencadangan manual, instalasi *patching* keamanan, serta penanganan replikasi toleransi kegagalan (*HADR*) yang memakan lebih dari 60% waktu tim rekayasa perangkat lunak.
+    - Pengelolaan mandiri mencakup pencadangan manual, instalasi penambalan keamanan (*patching*), serta penanganan replikasi toleransi kegagalan (*HADR*) yang memakan lebih dari 60% waktu tim rekayasa perangkat lunak.
 
 ---
 
@@ -63,7 +63,7 @@ Sebelum proses modernisasi, seluruh logika bisnis DineEase disatukan ke dalam sa
 
 ## 3. Recommended Cloud Architecture and Service Mapping
 
-### Task 1: Ketersediaan Tinggi dan Latensi Rendah (Low Latency & High Availability)
+### A. Ketersediaan Tinggi dan Latensi Rendah (Low Latency and High Availability)
 - **Analisis Kebutuhan Arsitektur:**
   - Layanan *Dispatch* dan pembaruan kurir membutuhkan waktu respons instan dengan jaminan Perjanjian Tingkat Layanan ketersediaan tinggi:
 
@@ -77,7 +77,7 @@ $$
     - Menyebarkan layanan mikro ke dalam arsitektur wilayah multi-zona (MZR).
     - Terdiri dari tiga zona ketersediaan (*Availability Zones*) fisik yang terisolasi secara mandiri dalam satu wilayah metropolitan, masing-masing dilengkapi sistem pendingin, pasokan listrik, dan koneksi jaringan independen dengan latensi antar-zona kurang dari dua milidetik (< 2 ms).
 
-### Task 2: Beban Kerja Terdedikasi Berkinerja Ekstrem (Dedicated Compute for Payments)
+### B. Beban Kerja Terdedikasi Berkinerja Ekstrem (Dedicated Compute for Payments)
 - **Analisis Kebutuhan Arsitektur:**
   - Pemrosesan pembayaran dan algoritma deteksi penipuan (*fraud detection*) membutuhkan komputasi berkecepatan tinggi, keamanan isolasi fisik mutlak, tanpa berbagi sumber daya CPU atau RAM dengan penyewa lain (*no multi-tenant noisy neighbors*), serta dukungan akselerasi grafis GPU.
 - **Rekomendasi Layanan IBM Cloud:**
@@ -85,7 +85,7 @@ $$
     - Menyediakan peladen fisik tunggal terdedikasi (*single-tenant physical servers*) tanpa lapisan overhead virtualisasi (*hypervisor*).
     - Memberikan akses perangkat keras langsung ke prosesor multi-core berkecepatan tinggi dan kartu grafis GPU Nvidia untuk memproses model inferensi deteksi penipuan secara instan dan memenuhi standar kepatuhan PCI-DSS.
 
-### Task 3: Layanan Mikro Berbasis API yang Elastis (Containerized Microservices)
+### C. Layanan Mikro Berbasis API yang Elastis (Containerized Microservices)
 - **Analisis Kebutuhan Arsitektur:**
   - Layanan Pencarian (*Search*), Katalog Menu (*Menu*), dan Penetapan Harga (*Pricing*) perlu dibangun dengan tumpukan teknologi poliglota yang ringan, portabel, mampu memulihkan diri secara otomatis saat gagal (*self-healing*), serta melakukan penskalaan dinamis saat menerima lonjakan panggilan HTTP REST API.
 - **Rekomendasi Layanan IBM Cloud:**
@@ -94,7 +94,7 @@ $$
     - Mengatur penskalaan horizontal otomatis (*Horizontal Pod Autoscaling*) dan pemulihan instans kontainer yang rusak tanpa intervensi manual.
     - *Alternatif Serverless*: **IBM Cloud Code Engine** untuk layanan mikro yang memerlukan penskalaan elastis langsung hingga ke nol (*scale-to-zero*) saat lalu lintas sepi.
 
-### Task 4: Lapisan Gerbang Komunikasi dan Perutean (API Gateway)
+### D. Lapisan Gerbang Komunikasi dan Perutean (API Gateway)
 - **Analisis Kebutuhan Arsitektur:**
   - Diperlukan satu titik masuk terpusat (*single entry point*) yang menjembatani komunikasi antara aplikasi seluler konsumen, aplikasi web back-office, dan sistem mitra eksternal dengan puluhan layanan mikro internal.
   - Berfungsi mengarahkan permintaan (*request routing*) berdasarkan peta rute URL, melakukan pembatasan kuota panggilan (*rate limiting*), serta mengelola otentikasi token keamanan.
@@ -102,7 +102,7 @@ $$
   - **IBM API Connect / IBM Cloud API Gateway:**
     - Mengabstraksi arsitektur internal layanan mikro dari konsumsi publik, menerapkan kebijakan keamanan terpusat (OAuth 2.0 / JWT), dan membagi beban kueri secara cerdas ke titik akhir layanan mikro yang sesuai.
 
-### Task 5: Optimalisasi Performa Baca Ulasan (Document-Based Database)
+### E. Optimalisasi Performa Baca Ulasan (Document-Based Database)
 - **Analisis Kebutuhan Arsitektur:**
   - Pembacaan data ulasan dan rating restoran membutuhkan format fleksibel yang mampu menampung data semi-terstruktur berformat JSON tanpa operasi relasional *JOIN* yang lambat.
   - Membutuhkan arsitektur *offline-first* agar ulasan tetap dapat diakses di ponsel konsumen saat koneksi internet tidak stabil.
@@ -112,7 +112,7 @@ $$
     - Menyimpan dokumen dalam format JSON hierarkis mandiri, memungkinkan pembacaan indeks ulasan dan rating dalam hitungan milidetik.
     - Memiliki kapabilitas sinkronisasi data bawaan (*built-in bidirectional sync*) yang mendukung pustaka PouchDB pada aplikasi seluler konsumen untuk pengalaman *offline-first*.
 
-### Task 6: Basis Data Transaksional Terkelola Penuh (Managed Relational Database)
+### F. Basis Data Transaksional Terkelola Penuh (Managed Relational Database)
 - **Analisis Kebutuhan Arsitektur:**
   - Modul Pemesanan dan Akuntansi membutuhkan basis data relasional terkelola penuh (*Database-as-a-Service* / DBaaS) yang menjamin kepatuhan transaksi ACID, pemulihan bencana otomatis (*High-Availability Disaster Recovery* / HADR), pemrosesan kueri analitik transaksional online (*OLTP*) berkecepatan tinggi, dan penskalaan kapasitas disk tanpa gangguan.
 - **Rekomendasi Layanan IBM Cloud:**
@@ -120,7 +120,7 @@ $$
     - Layanan basis data relasional enterprise terkelola yang menyediakan fitur ketersediaan tinggi HADR multi-zona dengan failover otomatis tanpa kehilangan data.
     - Menghilangkan 100% beban administratif rutin (pencadangan otomatis, enkripsi data *at rest*, dan instalasi patch keamanan).
 
-### Task 7: Penyaluran Media Cepat dan Caching Global (Content Delivery Network)
+### G. Penyaluran Media Cepat dan Caching Global (Content Delivery Network)
 - **Analisis Kebutuhan Arsitektur:**
   - DineEase memiliki ratusan ribu foto makanan beresolusi tinggi, logo mitra restoran, dan aset grafis statis yang memperberat kerja peladen aplikasi jika disajikan langsung dari server web utama.
   - Diperlukan solusi untuk menyalurkan aset dari simpul geografis terdekat ke pengguna, melakukan kompresi berkas otomatis, dan menyajikan tembolok (*caching*).
@@ -129,7 +129,7 @@ $$
     - Mendistribusikan aset statis ke ratusan titik kehadiran (*Points of Presence* / PoPs) di seluruh dunia (didukung kemitraan jaringan Akamai).
     - Memangkas jarak tempuh data (*latency reduction*), mengurangi beban transfer data ke server asal (*origin offload*), dan mengadaptasi resolusi gambar sesuai tipe layar perangkat konsumen.
 
-### Task 8: Peningkatan Ketersediaan dan Penyeimbangan Beban (Load Balancing)
+### H. Peningkatan Ketersediaan dan Penyeimbangan Beban (Load Balancing)
 - **Analisis Kebutuhan Arsitektur:**
   - Mendistribusikan lalu lintas lalu lintas masuk secara merata ke puluhan replika instans layanan mikro yang berjalan di zona-zona berbeda.
   - Melakukan uji kesehatan (*health checks*) berkala dan secara transparan mengalihkan lalu lintas dari instans yang gagal ke instans yang sehat.
@@ -137,7 +137,7 @@ $$
   - **IBM Cloud Load Balancer / IBM Cloud Internet Services (CIS) Global Load Balancer:**
     - Menyediakan penyeimbangan beban lalu lintas aplikasi pada Lapisan 4 (TCP/UDP) dan Lapisan 7 (HTTP/HTTPS) dengan kemampuan failover lintas zona ketersediaan secara mulus (*zero downtime*).
 
-### Task 9: Observabilitas dan Pemantauan Kesehatan Operasional (Cloud Monitoring)
+### I. Observabilitas dan Pemantauan Kesehatan Operasional (Cloud Monitoring)
 - **Analisis Kebutuhan Arsitektur:**
   - Ekosistem layanan mikro terdistribusi memerlukan visibilitas operasional terpusat untuk memantau metrik performa CPU, memori, latensi jaringan, penelusuran kesalahan transaksi, serta pembuatan dasbor visual dan peringatan dini otomatis (*proactive alerts*).
 - **Rekomendasi Layanan IBM Cloud:**
@@ -156,3 +156,9 @@ $$
 - **Strategi Basis Data Terpadu:** Penggabungan IBM Cloudant (NoSQL Dokumen untuk ulasan konsumen cepat) dan IBM Db2 on Cloud (RDBMS terkelola untuk konsistensi transaksi pesanan) mengoptimalkan performa baca dan integritas data secara bersamaan.
 - **Penyaluran Konten dan Penyeimbangan Beban:** Integrasi IBM Cloud CDN dan IBM Cloud Load Balancer meminimalkan latensi aset multimedia dan menjamin toleransi kesalahan instans.
 - **Observabilitas Menyeluruh:** IBM Cloud Monitoring memastikan stabilitas operasional melalui pemantauan telemetri waktu nyata dan penanganan anomali dini.
+
+### B. Evaluasi Manfaat Bisnis dan Efisiensi Operasional
+- **Eliminasi Titik Kegagalan Tunggal (*Single Point of Failure*):** Arsitektur terdistribusi multi-zona mengisolasi kegagalan modul sehingga gangguan pada satu layanan mikro (misalnya penjelajahan menu) tidak melumpuhkan pemrosesan pesanan yang sedang berjalan.
+- **Optimasi Efisiensi Biaya (*TCO Optimization*):** Pendekatan nirserver (*scale-to-zero*) dan penskalaan horizontal otomatis mengeliminasi pemborosan kapasitas komputasi pada jam-jam sepi transaksi.
+- **Peningkatan Pengalaman Pelanggan (*Customer Experience*):** Kombinasi CDN global dan latensi rendah antarzona (< 2 ms) memastikan antarmuka seluler konsumen tetap responsif bahkan saat jam sibuk promosi makanan.
+- **Fokus Rekayasa pada Nilai Tambah Bisnis:** Pengalihan beban pemeliharaan basis data ke model terkelola (*DBaaS*) membebaskan tim rekayasa perangkat lunak untuk berkonsentrasi pada pengembangan fitur baru daripada pemeliharaan infrastruktur rutin.

@@ -1,13 +1,13 @@
-# Final Project Tutorial: Deploying "Guess the Capital" on IBM Cloud Code Engine
+# Deploying Containerized Web Applications on IBM Cloud Code Engine
 
-Dokumen ini merupakan panduan tutorial instruksional praktikum mandiri untuk menyelesaikan proyek akhir komputasi awan. Tutorial ini membimbing Anda langkah demi langkah dalam memodernisasi dan menerapkan aplikasi web "Guess the Capital" ke lingkungan cloud, mulai dari verifikasi prasyarat lingkungan, pengujian lokal, pembuatan Dockerfile berbasis peladen web Nginx, pembangunan dan pengujian kontainer lokal, pengunggahan citra ke IBM Cloud Container Registry (ICR), hingga penerapan aplikasi nirserver (*serverless*) di IBM Cloud Code Engine dengan URL akses publik.
+Dokumen ini menyajikan panduan teknis komprehensif mengenai penerapan aplikasi web modern ke lingkungan komputasi awan menggunakan IBM Cloud Code Engine. Pembahasan mencakup verifikasi perkakas lingkungan (*environment setup*), pengujian lokal berbasis peladen Python, pengemasan aplikasi ke dalam citra kontainer Docker berbasis Nginx, distribusi citra ke IBM Cloud Container Registry (ICR), penerapan aplikasi nirserver (*serverless*), serta prosedur penanganan kendala (*troubleshooting*) produksi.
 
 ---
 
-## 1. Prerequisites and Lab Setup
+## 1. Prerequisites and Environment Setup
 
 ### A. Verifikasi Alat Baris Perintah (CLI Tools)
-Sebelum mengeksekusi instruksi proyek, pastikan perkakas baris perintah utama telah terpasang dan berfungsi dengan baik di dalam terminal Cloud IDE Anda:
+Sebelum mengeksekusi implementasi proyek, pastikan perkakas baris perintah utama telah terpasang dan berfungsi dengan baik di dalam terminal lingkungan kerja Anda:
 
 - **Instruksi 1: Memeriksa Instalasi Docker CLI**
   - Buka terminal baru melalui menu **Terminal > New Terminal**, lalu jalankan perintah:
@@ -39,7 +39,7 @@ Platform IBM Cloud Code Engine menyediakan antarmuka baris perintah yang telah d
 
 ---
 
-## 2. Task 1: Setting Up the Starter Code and Local Verification
+## 2. Starter Code Configuration and Local Verification
 
 ### A. Kloning Repositori Kode Sumber Aplikasi
 Aplikasi kuis "Guess the Capital" tersedia sebagai repositori kode awal (*starter code*) di GitHub.
@@ -93,7 +93,7 @@ python3 -m http.server 8000
 
 ---
 
-## 3. Task 2: Containerizing the Web Application with Docker
+## 3. Web Application Containerization with Docker
 
 ### A. Pembuatan Berkas Konfigurasi Dockerfile
 Untuk memodernisasi aplikasi web statis menjadi aplikasi siap cloud (*cloud-ready*), kita mengemas seluruh aset web ke dalam citra kontainer menggunakan peladen web Nginx yang ringan dan berkinerja tinggi.
@@ -146,7 +146,7 @@ docker build -t guess-the-capital .
 docker images
 ```
 
-  - *Hasil yang Diharapkan*: Tabel terminal menampilkan baris dengan repositori `guess-the-capital`, tag `latest`, beserta ukuran citra sekitar 140 MB hingga 190 MB.
+  - *Hasil yang Diharapkan*: Terminal menampilkan baris keluaran dengan repositori `guess-the-capital`, tag `latest`, beserta ukuran citra sekitar 140 MB hingga 190 MB.
 
 ### C. Menjalankan dan Menguji Kontainer Docker di Lingkungan Lokal
 - **Instruksi 1: Menjalankan Kontainer pada Mode Terlepas (Detached)**
@@ -169,7 +169,7 @@ docker run -it -d -p 8080:80 guess-the-capital
 
 ---
 
-## 4. Task 3: Pushing Container Image to IBM Container Registry
+## 4. Container Image Distribution to IBM Container Registry
 
 ### A. Menandai Citra Kontainer untuk IBM Container Registry (ICR)
 Agar platform cloud dapat mengambil dan menjalankan citra kontainer Anda, citra harus diberi label alamat registri jarak jauh (*remote registry*) dan diunggah ke IBM Cloud Container Registry.
@@ -199,7 +199,7 @@ docker push us.icr.io/${SN_ICR_NAMESPACE}/guess-the-capital
 
 ---
 
-## 5. Task 4: Deploying and Verifying Application on IBM Code Engine
+## 5. Serverless Application Deployment on IBM Cloud Code Engine
 
 ### A. Membuat dan Menerapkan Aplikasi Nirserver (Code Engine Application)
 IBM Cloud Code Engine akan mengunduh citra dari registri ICR, membuat beban kerja kontainer, dan mengonfigurasi rute lalu lintas web publik secara otomatis.
@@ -246,7 +246,7 @@ ibmcloud ce application get --name guess-the-capital
 
 ---
 
-## 6. Summary and Troubleshooting Guide
+## 6. Summary and Operational Troubleshooting
 
 ### A. Rangkuman Siklus Deployment Cloud-Native
 - **1. Kode Sumber Lokal (Local Development):** Mengembangkan dan menguji kode HTML/CSS/JavaScript menggunakan server pengujian sederhana.
