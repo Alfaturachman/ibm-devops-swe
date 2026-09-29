@@ -38,9 +38,9 @@ Repositori ini memuat dokumentasi komprehensif, catatan studi terstruktur, studi
       - Waktu Pemulihan Layanan (*Time to Restore Service / MTTR*): Waktu yang dibutuhkan untuk memulihkan sistem dari gangguan produksi.
     - Membedakan metrik yang dapat ditindaklanjuti (*Actionable Metrics*) dari sekadar metrik semu yang menyesatkan (*Vanity Metrics*).
     - Memantau metrik sosial dan kepuasan tim (*Social Metrics*) untuk mencegah kelelahan kerja (*burnout*).
-  - [Module 06: Case Studies and Final Exam](./01%20Introduction%20to%20DevOps/Module%2006%20-%20Case%20Studies%20and%20Final%20Exam/):
-    - Analisis studi kasus nyata pada transformasi enterprise berskala global.
-    - Penyelesaian skenario praktis: Otomasi *pipeline* rilis, migrasi sistem monolitik menuju arsitektur *microservices*, penanganan insiden produksi darurat dengan *post-mortem* tanpa menyalahkan (*blameless post-mortem*), dan pemecahan ujian akhir komprehensif.
+  - [Module 06: Final Project](./01%20Introduction%20to%20DevOps/Module%2006%20-%20Final%20Project/):
+    - Analisis studi kasus nyata pada transformasi enterprise berskala global: *Thinking DevOps* (peruntuhan antrean tiket dan adopsi IT swalayan), *Organizing for DevOps* (penyelarasan domain bisnis dan CI harian), serta *Social Coding* (budaya *Inner Source* dan insentif kolaboratif).
+    - Sintesis cetak biru arsitektur enterprise: Desain layanan mikro *cloud-native* nir-status, pola ketahanan sistem (*Bulkhead* dan *Circuit Breaker*), otomatisasi rilis CI/CD dan IaC, evaluasi pasca-insiden tanpa menyalahkan (*blameless post-mortem*), serta tata kelola metrik DORA.
 
 ### Course 02: Introduction to Cloud Computing [COMPLETED]
 - Deskripsi: Pengenalan arsitektur dan model operasional komputasi awan. Mempelajari model layanan (*IaaS, PaaS, SaaS*), model penerapan (*Public, Private, Hybrid, Community Cloud*), prinsip *software-defined cloud*, virtualisasi, komponen infrastruktur (komputasi, jaringan, *object storage*), kasus bisnis transisi CapEx ke OpEx, integrasi teknologi mutakhir (*AI, IoT, Blockchain*), tren *cloud native* (*Microservices, Serverless, DevOps on Cloud*), tata kelola keamanan (*IAM, Enkripsi, Observabilitas*), serta implementasi proyek akhir pada IBM Cloud Code Engine.
@@ -72,18 +72,49 @@ Repositori ini memuat dokumentasi komprehensif, catatan studi terstruktur, studi
     - Menjabarkan teknik observabilitas terpadu: pemantauan infrastruktur, pemantauan basis data, Application Performance Monitoring (APM), serta audit log panggilan API.
     - Menganalisis studi kasus enterprise nyata: The Weather Company, American Airlines, Cementos Pacasmayo, Welch's Food, dan LSPI, serta membedah lanskap karier spesialisasi cloud.
   - [Module 06: Final Project and Assignment](./02%20Introduction%20to%20Cloud%20Computing/Module%2006%20-%20Final%20Project%20and%20Assignment/):
-    - Menyelesaikan proyek akhir praktikum mandiri (*Hands-on Lab*): pengemasan aplikasi web interaktif "Guess the Capital" ke dalam citra kontainer Docker berbasis Nginx, publikasi citra ke IBM Container Registry (ICR), dan deployment ke platform nirserver IBM Cloud Code Engine dengan akses HTTPS publik.
+    - Menyelesaikan proyek akhir penerapan mandiri: pengemasan aplikasi web interaktif "Guess the Capital" ke dalam citra kontainer Docker berbasis Nginx, publikasi citra ke IBM Container Registry (ICR), dan deployment ke platform nirserver IBM Cloud Code Engine dengan akses HTTPS publik.
     - Menyusun rancangan solusi arsitektur enterprise DineEase 2.0: memodernisasi platform pengiriman makanan monolitik ke microservices cloud-native pada ekosistem IBM Cloud melalui sembilan pemetaan layanan (MZR, Bare Metal GPU, IKS/OpenShift, API Connect, Cloudant NoSQL, Db2 on Cloud, Cloud CDN, Load Balancer, dan IBM Cloud Monitoring).
 
-### Course 03: Introduction to Agile Development and Scrum [ON PROGRESS]
-- Status: Dalam Antrean.
-- Deskripsi: Prinsip-prinsip *Agile Manifesto* dan implementasi praktis kerangka kerja *Scrum*. Mempelajari peran dalam Scrum (*Product Owner, Scrum Master, Developers*), artefak Scrum (*Product Backlog, Sprint Backlog, Increment*), upacara/seremoni (*Sprint Planning, Daily Standup, Sprint Review, Sprint Retrospective*), penulisan *User Stories*, estimasi menggunakan *Story Points*, dan manajemen papan Kanban.
-- Akses Modul: [03 Introduction to Agile Development and Scrum](./03%20Introduction%20to%20Agile%20Development%20and%20Scrum/)
+### Course 03: Introduction to Agile Development and Scrum [COMPLETED]
+- Deskripsi: Prinsip-prinsip filosofi ketangkasan (*Agile Manifesto*) dan implementasi praktis kerangka kerja *Scrum*. Mempelajari pembagian tiga peran Scrum (*Product Owner, Scrum Master, Developers*), perumusan cerita pengguna (*User Stories*) berbasis kriteria INVEST dan format Gherkin, teknik estimasi konsensus (*Story Points* dan *Planning Poker*), orkestrasi alur kerja harian pada papan Kanban visual, analisis diagram *Burndown Chart*, upacara penutupan sprint (*Sprint Review* dan *Sprint Retrospective*), metrik DORA, hingga eksekusi proyek akhir rekayasa tangkas.
+- [Course 03: Introduction to Agile Development and Scrum](./03%20Introduction%20to%20Agile%20Development%20and%20Scrum/README.md) menyajikan panduan implementasi komprehensif mengenai tata kelola pengembangan tangkas. Materi terbagi menjadi empat modul pembelajaran terstruktur:
+  - [Module 1: Introduction to Agile and Scrum](./03%20Introduction%20to%20Agile%20Development%20and%20Scrum/Module%201%20-%20Introduction%20to%20Agile%20and%20Scrum/):
+    - Memahami krisis perangkat lunak akibat model Waterfall dan pergeseran menuju Manifesto Agile (4 Nilai Inti dan 12 Prinsip Panduan).
+    - Mempelajari pilar pengendalian proses empiris Scrum (transparansi, inspeksi, adaptasi), tiga peran utama, tiga artefak resmi, dan empat upacara terikat waktu (*timeboxed events*).
+    - Membangun tim berkinerja tinggi yang mandiri (*self-organizing*), lintas fungsi (*cross-functional*), dengan keterampilan berbentuk T (*T-shaped skills*).
+  - [Module 2: Agile Planning](./03%20Introduction%20to%20Agile%20Development%20and%20Scrum/Module%202%20-%20Agile%20Planning/):
+    - Menerapkan paradigma perencanaan adaptif (*the planning onion*) dan *Rolling Wave Planning*.
+    - Menyusun cerita pengguna menggunakan konsep Tiga C (*Card, Conversation, Confirmation*), templat Connextra (`As a... I need... So that...`), kriteria INVEST, dan kriteria penerimaan formal Gherkin (`Given... When... Then...`).
+    - Menguasai estimasi ukuran relatif berbasis konsensus (*Story Points* deret Fibonacci) melalui *Planning Poker* dan sesi *Backlog Refinement*.
+  - [Module 3: Daily Execution](./03%20Introduction%20to%20Agile%20Development%20and%20Scrum/Module%203%20-%20Daily%20Execution/):
+    - Mengelola alur kerja visual menggunakan papan Kanban dengan batas *Work in Process* (WIP Limits) untuk mencegah kemacetan kerja.
+    - Menjalankan pertemuan harian *Daily Stand-up* (15 menit) yang berfokus pada kemajuan dan eliminasi hambatan (*impediments*).
+    - Memantau tren sisa usaha pada diagram *Burndown Chart*, memfasilitasi *Sprint Review* berbasis demonstrasi perangkat lunak nyata, menjalankan *Sprint Retrospective* tanpa *Product Owner* untuk keamanan psikologis, serta mengukur keberhasilan menggunakan metrik DORA.
+  - [Module 4: Final Project](./03%20Introduction%20to%20Agile%20Development%20and%20Scrum/Module%204%20-%20Final%20Project/):
+    - Melaksanakan simulasi proyek rekayasa tangkas penuh untuk pengembangan katalog produk *e-commerce*.
+    - Mengonversi 10 kebutuhan bisnis ke templat cerita pengguna Gherkin di repositori publik GitHub, mengelola alur papan Kanban melintasi status *In Progress* hingga *Done*, menganalisis kemajuan *Burndown Chart*, serta menerapkan tata kelola mutu *Definition of Ready (DoR)* dan *Definition of Done (DoD)*.
 
-### Course 04: Introduction to Software Engineering [ON PROGRESS]
-- Status: Dalam Antrean.
-- Deskripsi: Dasar-dasar rekayasa perangkat lunak modern dan siklus hidup pengembangan sistem (*Software Development Life Cycle* / SDLC). Mencakup metodologi analisis kebutuhan, prinsip desain perangkat lunak berorientasi objek (OOPS), arsitektur modular, pola desain (*design patterns*), manajemen konfigurasi, dan jaminan kualitas (*Quality Assurance*).
-- Akses Modul: [04 Introduction to Software Engineering](./04%20Introduction%20to%20Software%20Engineering/)
+### Course 04: Introduction to Software Engineering [COMPLETED]
+- Deskripsi: Dasar-dasar rekayasa perangkat lunak modern dan siklus hidup pengembangan sistem (*Software Development Life Cycle* / SDLC). Mempelajari spektrum model proses pengembangan (Waterfall, Prototyping, Iterative, Spiral, V-Model, Agile), arsitektur web modern (Front-End, Back-End, Full-Stack, REST API), ekosistem perkakas bantu pengembang, logika komputasi dan struktur data fundamental, prinsip desain SOLID dan pola desain Gang of Four (GoF), pola arsitektur enterprise dan topologi komputasi awan, diferensiasi peran karier rekayasa, serta perancangan peta jalan karier profesional.
+- [Course 04: Introduction to Software Engineering](./04%20Introduction%20to%20Software%20Engineering/README.md) memberikan wawasan fundamental dan aplikatif mengenai disiplin rekayasa perangkat lunak modern. Materi terbagi menjadi enam modul pembelajaran mendalam:
+  - [Module 1: The Software Development Lifecycle](./04%20Introduction%20to%20Software%20Engineering/Module%201%20-%20The%20Software%20Development%20Lifecycle/):
+    - Memahami definisi rekayasa perangkat lunak (IEEE dan Pressman), karakteristik perangkat lunak yang direkayasa vs dimanufaktur, enam fase SDLC, serta kepatuhan kode etik IEEE-CS/ACM.
+    - Analisis komparatif enam model proses rekayasa (Waterfall, Prototyping, Iterative, Spiral, V-Model, Agile) dan pembagian peran kunci (*Product Manager, Project Manager, Systems Analyst, Software Architect, Programmer, Tester/QA*).
+  - [Module 2: Introduction to Software Development](./04%20Introduction%20to%20Software%20Engineering/Module%202%20-%20Introduction%20to%20Software%20Development/):
+    - Menguasai tiga pilar arsitektur web modern (Front-End, Back-End, Full-Stack), siklus permintaan-tanggapan HTTP/HTTPS, arsitektur RESTful API, pertukaran data JSON/XML, dan dekomposisi monolitik ke microservices.
+    - Membedah taksonomi perkakas pengembang: sistem kendali versi (Git/GitHub), IDE modern, otomatisasi build, kerangka kerja pengujian (TDD/BDD), dan platform observabilitas (Prometheus/Grafana).
+  - [Module 3: Basics of Programming](./04%20Introduction%20to%20Software%20Engineering/Module%203%20-%20Basics%20of%20Programming/):
+    - Mempelajari klasifikasi bahasa pemrograman berdasarkan abstraksi dan paradigma (imperatif, OOP, fungsional, deklaratif), mekanisme eksekusi (kompilasi, interpretasi, JIT), dan struktur modular basis kode.
+    - Menguasai logika kontrol alur, struktur data fundamental (array, linked list, stack, queue, hash table), algoritma pencarian dan pengurutan, notasi kompleksitas Big-O, serta penanganan eksepsi.
+  - [Module 4: Software Architecture, Design, and Patterns](./04%20Introduction%20to%20Software%20Engineering/Module%204%20-%20Software%20Architecture%2C%20Design%2C%20and%20Patterns/):
+    - Membedah pemisahan arsitektur sistem (*the blueprint*) vs desain detail, penerapan prinsip SOLID dan DRY, serta katalog pola desain Gang of Four (Creational, Structural, Behavioral).
+    - Menganalisis lima pola arsitektur enterprise (Monolith, N-Tier, Event-Driven, Microservices, Serverless), empat topologi cloud (On-Premises, IaaS VM, Kubernetes, Serverless FaaS), dan strategi rilis minim downtime (*Rolling, Blue-Green, Canary*).
+  - [Module 5: Job Opportunities and Skillsets in Software Engineering](./04%20Introduction%20to%20Software%20Engineering/Module%205%20-%20Job%20Opportunities%20and%20Skillsets%20in%20Software%20Engineering/):
+    - Menelaah profil harian rekayasawan perangkat lunak, pemetaan keterampilan teknis (*hard skills*) dan interpersonal (*soft skills*), etika profesi, serta jalur karier kontributor individual (*IC track*) vs kepemimpinan (*Management track*).
+    - Memetakan diferensiasi peran rekayasa teknologi (Frontend, Backend, Full-Stack, Cloud/DevOps, SRE, Data, Security), tren pasar tenaga kerja, evaluasi remunerasi, serta strategi membangun portofolio proyek terbuka di GitHub dan LinkedIn.
+  - [Module 6: Final Project](./04%20Introduction%20to%20Software%20Engineering/Module%206%20-%20Final%20Project/):
+    - Menyusun dokumentasi studi kasus perencanaan karier komprehensif untuk posisi *Associate Cloud Software Engineer (DevOps & Infrastructure Automation)* di Red Hat/IBM.
+    - Menjalankan analisis kualifikasi lowongan industri nyata, evaluasi kesiapan diri, audit kesenjangan portofolio (*gap analysis*), serta perumusan peta jalan rencana aksi konkret berbasis tiga pilar: Pendidikan dan Pengalaman, Keterampilan Teknis, dan Sertifikasi Profesional.
 
 ### Course 05: Getting Started with Git and GitHub [ON PROGRESS]
 - Status: Dalam Antrean.
@@ -138,4 +169,3 @@ Repositori ini memuat dokumentasi komprehensif, catatan studi terstruktur, studi
 - Status: Dalam Antrean.
 - Deskripsi: Proyek puncak komprehensif yang mengintegrasikan seluruh keahlian yang telah dipelajari sepanjang program spesialisasi. Pembelajar merancang, membangun, menguji, mengamankan, mengotomasi, dan menggelar aplikasi berbasis *microservices* ke klaster cloud menggunakan jalur *CI/CD* otomatis penuh yang dilengkapi pemantauan observabilitas *real-time*.
 - Akses Modul: [15 DevOps Capstone Project](./15%20DevOps%20Capstone%20Project/)
-
