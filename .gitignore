@@ -1,0 +1,57 @@
+﻿# ==============================================================================
+# Coursera Academic Integrity & Honor Code Exclusions
+# Mengabaikan seluruh berkas kuis bertingkat, bank soal, dan kunci jawaban ujian
+# agar repositori aman untuk dipublikasikan sebagai portofolio publik.
+# ==============================================================================
+
+# Graded Quizzes, Final Exams & Assessments (Case-insensitive match patterns)
+*[Gg]raded [Qq]uiz*
+*[Gg]raded [Aa]ssessment*
+*[Gg]raded [Cc]hallenge*
+*[Mm]odule [Cc]hallenge*
+*[Ff]inal [Ee]xam*
+*[Pp]ractice [Qq]uiz*
+*Quiz*.md
+*quiz*.md
+*Case Studies and Final Exam*.md
+*[Aa]ssignment*.md
+
+# ==============================================================================
+# Operating System & Editor Artifacts
+# ==============================================================================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Office / Temporary Lock Files
+~$*
+*.tmp
+
+# Editor / IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Python Cache & Environments
+__pycache__/
+*.py[cod]
+*.class
+.pytest_cache/
+venv/
+env/
+.env
+
+# Node.js Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ==============================================================================
+# Course Templates & Working Prompts
+# ==============================================================================
+PROMPT_INSTRUCTION_TEMPLATE.md
+instruction.md
